@@ -45,12 +45,19 @@ getAllImagesFromFile();
 //-------------------------------------
 
 function renderDropDown() {
-  console.log(allImages);
+  const uniqueKeywords = [];
   let dropdown = $('select');
-  // dropdown.empty();
   allImages.forEach(value => {
-    console.log('value is', value);
-    dropdown.append($('<option></option>').attr('value', value.keyword).text(value.keyword));
+    let flag = true;
+    uniqueKeywords.forEach(uniqueImage => {
+      if (uniqueImage === value.keyword) {
+        flag = false;
+      }
+    })
+    if (flag) {
+      dropdown.append($('<option></option>').attr('value', value.keyword).text(value.keyword));
+      uniqueKeywords.push(value.keyword);
+    }
   })
 }
 
