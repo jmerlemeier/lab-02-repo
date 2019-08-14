@@ -26,7 +26,7 @@ Image.prototype.renderwithJquery = function() {
 
 //AJAX
 const getAllImagesFromFile = () => {
-  $.get('data/page-1.json').then(images => {
+  $.get('data/page-1.json').then( images => {
     console.log('imgs from the then.', images);
 
     images.forEach(eachImage => {
@@ -36,8 +36,63 @@ const getAllImagesFromFile = () => {
     allImages.forEach(image => {
       image.renderwithJquery();
     })
+    renderDropDown();
   })
 
 }
 
 getAllImagesFromFile();
+//-------------------------------------
+
+function renderDropDown() {
+  console.log(allImages);
+  let dropdown = $('select');
+  // dropdown.empty();
+  allImages.forEach(value => {
+    console.log('value is', value);
+    dropdown.append($('<option></option>').attr('value', value.keyword).text(value.keyword));
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //array of keywords
+// const getKeywords = () => {
+//   const keywordArr = [];
+//   allImages.forEach((value) => {
+//     keywordArr.push(value.keyword)
+//   });
+//   return keywordArr;
+// };
+
+// //make dropdown using prototype
+// Image.prototype.renderDropDown = function() {
+//   // const $mydropdownTemplate = $('dropdown-template');
+//   // const $mydropdownHtml = $mydropdownTemplate.html();
+
+//   const $newOption = $('<option></option>')
+//   $newOption.text()
+// }
+// //grab 'select'
+// //make a copy
+// //plug in keywords
+// //append
