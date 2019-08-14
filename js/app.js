@@ -23,3 +23,21 @@ Image.prototype.renderwithJquery = function() {
   $newSection.find('p').text(this.description);
   $('main').append($newSection);
 }
+
+//AJAX
+const getAllImagesFromFile = () => {
+  $.get('data/page-1.json').then(images => {
+    console.log('imgs from the then.', images);
+
+    images.forEach(eachImage => {
+      new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.numberofhorns);
+    })
+
+    allImages.forEach(image => {
+      image.renderwithJquery();
+    })
+  })
+
+}
+
+getAllImagesFromFile();
