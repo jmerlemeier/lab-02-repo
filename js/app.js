@@ -21,6 +21,7 @@ Image.prototype.renderwithJquery = function() {
   $newSection.find('h2').text(this.title);
   $newSection.find('img').attr('src', this.image_url);
   $newSection.find('p').text(this.description);
+  $newSection.find('img').attr('alt', this.keyword);
   $('main').append($newSection);
 }
 
@@ -37,6 +38,7 @@ const getAllImagesFromFile = () => {
       image.renderwithJquery();
     })
     renderDropDown();
+    //filterImages();
   })
 
 }
@@ -61,8 +63,12 @@ function renderDropDown() {
   })
 }
 
-
-
+$('select').on('change', function() {
+  let $selected = $(this).val();
+  console.log($selected);
+  $('section').hide();
+  $(`img[alt = "${$selected}"]`).show();
+});
 
 
 

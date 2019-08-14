@@ -33,3 +33,8 @@ Start time:
 Finish time: 
 
 Actual time needed to complete: 
+
+
+## Resources: 
+
+https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json
