@@ -1,0 +1,25 @@
+body {
+  width: 1080px;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+}
+img {
+  object-fit: cover;
+  width: 200px;
+  height:200px;
+  
+}
+
+section {
+  float: left;
+  width: 200px;
+  height: 250px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+}

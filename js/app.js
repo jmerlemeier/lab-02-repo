@@ -19,7 +19,7 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
 Image.prototype.renderwithJquery = function () {
   const $myTemplate = $('#photo-template');
   const $myTemplateHtml = $myTemplate.html();
-
+  $myTemplate.hide();
   const $newSection = $('<section></section>')
   $newSection.html($myTemplateHtml);
 
