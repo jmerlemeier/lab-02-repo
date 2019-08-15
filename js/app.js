@@ -11,10 +11,10 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   allImages.push(this);
 };
 
-Image.prototype.renderwithJquery = function() {
+Image.prototype.renderwithJquery = function () {
   const $myTemplate = $('#photo-template');
   const $myTemplateHtml = $myTemplate.html();
-
+  $myTemplate.hide();
   const $newSection = $('<section></section>')
   $newSection.html($myTemplateHtml);
 
@@ -27,7 +27,7 @@ Image.prototype.renderwithJquery = function() {
 
 //AJAX
 const getAllImagesFromFile = () => {
-  $.get('data/page-1.json').then( images => {
+  $.get('data/page-1.json').then(images => {
     console.log('imgs from the then.', images);
 
     images.forEach(eachImage => {
@@ -63,11 +63,11 @@ function renderDropDown() {
   })
 }
 
-$('select').on('change', function() {
+$('select').on('change', function () {
   let $selected = $(this).val();
   console.log($selected);
   $('section').hide();
-  $(`img[alt = "${$selected}"]`).show();
+  $(`img[alt = ${$selected}]`).parent().show();
 });
 
 
