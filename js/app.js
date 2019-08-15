@@ -5,7 +5,9 @@
 // var html = template(context);
 // $('main').append(html);
 
-const allImages = [];
+let allImagesOne = [];
+let allImagesTwo = [];
+
 
 const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.image_url = image_url;
@@ -13,7 +15,6 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.description = description;
   this.keyword = keyword;
   this.numberofhorns = numberofhorns;
-  allImages.push(this);
 };
 
 Image.prototype.renderwithJquery = function () {
@@ -33,40 +34,67 @@ Image.prototype.renderwithJquery = function () {
 }
 
 //AJAX
-const getAllImagesFromFile = () => {
-  $.get('data/page-1.json').then(images => {
-    images.forEach(eachImage => {
-      new Image(
-        eachImage.image_url,
-        eachImage.title,
-        eachImage.description,
-        eachImage.keyword,
-        eachImage.horns
-      );
-    })
+// const getAllPageOneFiles = () => {
+//   $.get('data/page-1.json').then(images => {
+//     images.forEach(eachImage => {
+//       allImagesOne.push(new Image(
+//         eachImage.image_url,
+//         eachImage.title,
+//         eachImage.description,
+//         eachImage.keyword,
+//         eachImage.horns
+//       ));
+//     })
+//     allImagesOne.forEach(image => {
+//       image.renderwithJquery();
+//     })
+//   })
+// }
 
-    allImages.forEach(image => {
-      image.renderwithJquery();
-    })
-
-    //filterImages();
+const renderPageOne = () => {
+  allImagesOne.forEach(image => {
+    image.renderwithJquery();
   })
-
 }
 
-getAllImagesFromFile();
+const getAllPagOneFiles = () => {
+  $.get('data/page-1.json').then(images => {
+    images.forEach(eachImage => {
+      allImagesOne.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+    renderPageOne();
+  })
+}
+
+const renderPageTwo = () => {
+  allImagesTwo.forEach(image => {
+    image.renderwithJquery();
+  })
+}
+
+const getAllPageTwoFiles = () => {
+  $.get('data/page-2.json').then(images => {
+    images.forEach(eachImage => {
+      allImagesTwo.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+  })
+}
+
+
+getAllPageTwoFiles();
+getAllPagOneFiles();
+
 //-------------------------------------
 
 function renderDropDown(attribute) {
   const uniques = [];
   let dropdown = $('select');
-  allImages.forEach(image => {
+  allImagesOne.forEach(image => {
     let flag = true;
     uniques.forEach(uniqueImage => {
       if (uniqueImage === image[attribute]) {
         flag = false;
       }
-
     })
     if (flag) {
       dropdown
@@ -96,5 +124,15 @@ $('input[type=radio]').on('change', function () {
   }
 });
 
+$('#page-one').on('click', function () {
+  $('section').hide();
+  renderPageOne();
+  //allImagesOne = [];
+})
 
+$('#page-two').on('click', function () {
+  $('section').hide()
+  renderPageTwo();
+  // console.log('get all images 2', getAllPageTwoFiles());
+})
 
