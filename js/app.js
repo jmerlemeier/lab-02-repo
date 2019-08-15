@@ -1,11 +1,8 @@
 'use strict'
 
-// var source = document.getElementById("entry-template").innerHTML;
-// var template = Handlebars.compile(source);
-// var html = template(context);
-// $('main').append(html);
+let allImagesOne = [];
+let allImagesTwo = [];
 
-const allImages = [];
 
 const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.image_url = image_url;
@@ -13,60 +10,62 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.description = description;
   this.keyword = keyword;
   this.numberofhorns = numberofhorns;
-  allImages.push(this);
 };
 
-Image.prototype.renderwithJquery = function () {
-  const $myTemplate = $('#photo-template');
-  const $myTemplateHtml = $myTemplate.html();
-  $myTemplate.hide();
-  const $newSection = $('<section></section>')
-  $newSection.html($myTemplateHtml);
+Image.prototype.renderWithHandleBars = function () {
+  let hornHtml = $('#horn-template').html();
+  const renderImageWithHandlebars = Handlebars.compile(hornHtml);
+  const hornImage = renderImageWithHandlebars(this);
+  $('main').append(hornImage);
+};
 
-  $newSection.find('h2').text(this.title);
-  $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('p').text(this.description);
-  $newSection.find('img').attr('data-keyword', this.keyword);
-  $newSection.find('img').attr('data-horns', this.numberofhorns);
 
-  $('main').append($newSection);
+//renderWithHandleBars(allImagesOne);
+
+const renderPageOne = () => {
+  allImagesOne.forEach(image => {
+    image.renderWithHandleBars();
+  })
 }
 
-//AJAX
-const getAllImagesFromFile = () => {
+const getAllPagOneFiles = () => {
   $.get('data/page-1.json').then(images => {
     images.forEach(eachImage => {
-      new Image(
-        eachImage.image_url,
-        eachImage.title,
-        eachImage.description,
-        eachImage.keyword,
-        eachImage.horns
-      );
+      allImagesOne.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
     })
-
-    allImages.forEach(image => {
-      image.renderwithJquery();
-    })
-
-    //filterImages();
+    renderPageOne();
   })
-
 }
 
-getAllImagesFromFile();
+const renderPageTwo = () => {
+  allImagesTwo.forEach(image => {
+    image.renderWithHandleBars();
+  })
+}
+
+const getAllPageTwoFiles = () => {
+  $.get('data/page-2.json').then(images => {
+    images.forEach(eachImage => {
+      allImagesTwo.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+  })
+}
+
+
+getAllPageTwoFiles();
+getAllPagOneFiles();
+
 //-------------------------------------
 
 function renderDropDown(attribute) {
   const uniques = [];
   let dropdown = $('select');
-  allImages.forEach(image => {
+  allImagesOne.forEach(image => {
     let flag = true;
     uniques.forEach(uniqueImage => {
       if (uniqueImage === image[attribute]) {
         flag = false;
       }
-
     })
     if (flag) {
       dropdown
@@ -95,3 +94,16 @@ $('input[type=radio]').on('change', function () {
     renderDropDown('numberofhorns');
   }
 });
+
+$('#page-one').on('click', function () {
+  $('section').hide();
+  renderPageOne();
+  //allImagesOne = [];
+})
+
+$('#page-two').on('click', function () {
+  $('section').hide()
+  renderPageTwo();
+  // console.log('get all images 2', getAllPageTwoFiles());
+})
+
