@@ -1,0 +1,23 @@
+h1 {
+  font-family: 'Lexend Zetta', sans-serif;
+  font-size: 2em;
+  text-align: center;
+  padding: 1em;
+}
+
+body {
+  width: 100%;
+  margin: auto;
+}
+
+img {
+  width: 10em;
+}
+
+#photo-template {
+  margin: 2em;
+}
+
+section {
+  
+}
