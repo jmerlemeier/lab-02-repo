@@ -6,11 +6,11 @@ body {
 header {
   text-align: center;
 }
+
 img {
   object-fit: cover;
   width: 200px;
   height:200px;
-  
 }
 
 section {
@@ -19,11 +19,19 @@ section {
   height: 250px;
 }
 
-footer {
+/* footer {
   position: fixed;
   bottom: 0;
+
 }
 
 #radio-buttons {
   display: block;
 }
+=======
+} */
+
+#radio-buttons {
+  display: block;
+}
+
