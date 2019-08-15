@@ -1,5 +1,10 @@
 'use strict'
 
+// var source = document.getElementById("entry-template").innerHTML;
+// var template = Handlebars.compile(source);
+// var html = template(context);
+// $('main').append(html);
+
 const allImages = [];
 
 const Image = function (image_url, title, description, keyword, numberofhorns) {
@@ -69,43 +74,3 @@ $('select').on('change', function () {
   $('section').hide();
   $(`img[alt = ${$selected}]`).parent().show();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //array of keywords
-// const getKeywords = () => {
-//   const keywordArr = [];
-//   allImages.forEach((value) => {
-//     keywordArr.push(value.keyword)
-//   });
-//   return keywordArr;
-// };
-
-// //make dropdown using prototype
-// Image.prototype.renderDropDown = function() {
-//   // const $mydropdownTemplate = $('dropdown-template');
-//   // const $mydropdownHtml = $mydropdownTemplate.html();
-
-//   const $newOption = $('<option></option>')
-//   $newOption.text()
-// }
-// //grab 'select'
-// //make a copy
-// //plug in keywords
-// //append
