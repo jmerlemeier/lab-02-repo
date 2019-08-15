@@ -67,7 +67,9 @@ $('select').on('change', function() {
   let $selected = $(this).val();
   console.log($selected);
   $('section').hide();
-  $(`img[alt = "${$selected}"]`).show();
+  //How do I target an image based on alt?
+  //unhide the divs using parent node. =>>> .parent()
+  $(`img[alt = ${$selected}]`).parent().show();
 });
 
 
@@ -85,27 +87,3 @@ $('select').on('change', function() {
 
 
 
-
-
-
-// //array of keywords
-// const getKeywords = () => {
-//   const keywordArr = [];
-//   allImages.forEach((value) => {
-//     keywordArr.push(value.keyword)
-//   });
-//   return keywordArr;
-// };
-
-// //make dropdown using prototype
-// Image.prototype.renderDropDown = function() {
-//   // const $mydropdownTemplate = $('dropdown-template');
-//   // const $mydropdownHtml = $mydropdownTemplate.html();
-
-//   const $newOption = $('<option></option>')
-//   $newOption.text()
-// }
-// //grab 'select'
-// //make a copy
-// //plug in keywords
-// //append
