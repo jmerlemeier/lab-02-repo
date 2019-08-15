@@ -3,14 +3,23 @@
 
 <head>
   <title>The Gallery of Horns</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" type="text/css" href="css/reset.css" />
   <link rel="stylesheet" type="text/css" href="css/base.css" />
   <link rel="stylesheet" type="text/css" href="css/layouts.css" />
   <link rel="stylesheet" type="text/css" href="css/modules.css" />
   <link href="https://fonts.googleapis.com/css?family=Lexend+Zetta&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200&display=swap" rel="stylesheet">
+
+  <script id="horn-template" type="text/x-handlebars-template">
+    <section id="{{keyword}}">
+      <h2>{{title}}</h2>
+      <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{horns}}">
+      <p>{{description}}</p>
+    </section>
+    </script>
+
+
 </head>
 
 <body>
@@ -31,11 +40,11 @@
     </nav>
   </header>
   <main>
-    <section id="photo-template">
+    <!-- <section id="photo-template">
       <h2></h2>
       <img src="" alt="" data-keyword="" data-horns="">
       <p></p>
-    </section>
+    </section> -->
   </main>
   <footer>
     &copy; 2019 Code Fellows

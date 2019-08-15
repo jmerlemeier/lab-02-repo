@@ -1,10 +1,5 @@
 'use strict'
 
-// var source = document.getElementById("entry-template").innerHTML;
-// var template = Handlebars.compile(source);
-// var html = template(context);
-// $('main').append(html);
-
 let allImagesOne = [];
 let allImagesTwo = [];
 
@@ -17,43 +12,19 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.numberofhorns = numberofhorns;
 };
 
-Image.prototype.renderwithJquery = function () {
-  const $myTemplate = $('#photo-template');
-  const $myTemplateHtml = $myTemplate.html();
-  $myTemplate.hide();
-  const $newSection = $('<section></section>')
-  $newSection.html($myTemplateHtml);
+Image.prototype.renderWithHandleBars = function () {
+  let hornHtml = $('#horn-template').html();
+  const renderImageWithHandlebars = Handlebars.compile(hornHtml);
+  const hornImage = renderImageWithHandlebars(this);
+  $('main').append(hornImage);
+};
 
-  $newSection.find('h2').text(this.title);
-  $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('p').text(this.description);
-  $newSection.find('img').attr('data-keyword', this.keyword);
-  $newSection.find('img').attr('data-horns', this.numberofhorns);
 
-  $('main').append($newSection);
-}
-
-//AJAX
-// const getAllPageOneFiles = () => {
-//   $.get('data/page-1.json').then(images => {
-//     images.forEach(eachImage => {
-//       allImagesOne.push(new Image(
-//         eachImage.image_url,
-//         eachImage.title,
-//         eachImage.description,
-//         eachImage.keyword,
-//         eachImage.horns
-//       ));
-//     })
-//     allImagesOne.forEach(image => {
-//       image.renderwithJquery();
-//     })
-//   })
-// }
+//renderWithHandleBars(allImagesOne);
 
 const renderPageOne = () => {
   allImagesOne.forEach(image => {
-    image.renderwithJquery();
+    image.renderWithHandleBars();
   })
 }
 
@@ -68,7 +39,7 @@ const getAllPagOneFiles = () => {
 
 const renderPageTwo = () => {
   allImagesTwo.forEach(image => {
-    image.renderwithJquery();
+    image.renderWithHandleBars();
   })
 }
 

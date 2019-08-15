@@ -1,37 +1,29 @@
-body {
-  width: 1080px;
-  margin: auto;
+img {
+  width: 12em;
+}
+
+main {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  height: 100%;
+}
+
+h2, p {
+  width: 12em;
+  font-family: 'Work Sans', sans-serif;
 }
 
 header {
   text-align: center;
-}
 
-img {
-  object-fit: cover;
-  width: 200px;
-  height:200px;
 }
 
 section {
-  float: left;
-  width: 210px;
-  height: 250px;
+  border: solid black 0.2em;
+  padding: 1em;
+  margin: 7em;
 }
 
-/* footer {
-  position: fixed;
-  bottom: 0;
 
-}
-
-#radio-buttons {
-  display: block;
-}
-=======
-} */
-
-#radio-buttons {
-  display: block;
-}
 
