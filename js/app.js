@@ -106,4 +106,3 @@ $('#page-two').on('click', function () {
   renderPageTwo();
   // console.log('get all images 2', getAllPageTwoFiles());
 })
-
