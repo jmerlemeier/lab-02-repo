@@ -1,23 +1,26 @@
-h1 {
-  font-family: 'Lexend Zetta', sans-serif;
-  font-size: 2em;
-  text-align: center;
-  padding: 1em;
-}
-
-body {
-  width: 100%;
-  margin: auto;
-}
-
 img {
-  width: 10em;
+  width: 12em;
 }
 
-#photo-template {
-  margin: 2em;
+main {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  height: 100%;
+}
+
+h2, p {
+  width: 12em;
+  font-family: 'Work Sans', sans-serif;
+}
+
+header {
+  text-align: center;
+
 }
 
 section {
-  
+  border: solid black 0.2em;
+  padding: 1em;
+  margin: 7em;
 }

@@ -1,6 +1,8 @@
 'use strict'
 
-const allImages = [];
+let allImagesOne = [];
+let allImagesTwo = [];
+
 
 const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.image_url = image_url;
@@ -8,70 +10,102 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.description = description;
   this.keyword = keyword;
   this.numberofhorns = numberofhorns;
-  allImages.push(this);
 };
 
-Image.prototype.renderwithJquery = function() {
-  const $myTemplate = $('#photo-template');
-  const $myTemplateHtml = $myTemplate.html();
+Image.prototype.renderWithHandleBars = function () {
+  let hornHtml = $('#horn-template').html();
+  const renderImageWithHandlebars = Handlebars.compile(hornHtml);
+  const hornImage = renderImageWithHandlebars(this);
+  $('main').append(hornImage);
+};
 
-  const $newSection = $('<section></section>')
-  $newSection.html($myTemplateHtml);
 
-  $newSection.find('h2').text(this.title);
-  $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('p').text(this.description);
-  $newSection.find('img').attr('alt', this.keyword);
-  $('main').append($newSection);
-}
+//renderWithHandleBars(allImagesOne);
 
-//AJAX
-const getAllImagesFromFile = () => {
-  $.get('data/page-1.json').then( images => {
-    console.log('imgs from the then.', images);
-
-    images.forEach(eachImage => {
-      new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.numberofhorns);
-    })
-
-    allImages.forEach(image => {
-      image.renderwithJquery();
-    })
-    renderDropDown();
-    //filterImages();
+const renderPageOne = () => {
+  allImagesOne.forEach(image => {
+    image.renderWithHandleBars();
   })
-
 }
 
-getAllImagesFromFile();
+const getAllPagOneFiles = () => {
+  $.get('data/page-1.json').then(images => {
+    images.forEach(eachImage => {
+      allImagesOne.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+    renderPageOne();
+  })
+}
+
+const renderPageTwo = () => {
+  allImagesTwo.forEach(image => {
+    image.renderWithHandleBars();
+  })
+}
+
+const getAllPageTwoFiles = () => {
+  $.get('data/page-2.json').then(images => {
+    images.forEach(eachImage => {
+      allImagesTwo.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+    })
+  })
+}
+
+
+getAllPageTwoFiles();
+getAllPagOneFiles();
+
 //-------------------------------------
 
-function renderDropDown() {
-  const uniqueKeywords = [];
+function renderDropDown(attribute) {
+  const uniques = [];
   let dropdown = $('select');
-  allImages.forEach(value => {
+  allImagesOne.forEach(image => {
     let flag = true;
-    uniqueKeywords.forEach(uniqueImage => {
-      if (uniqueImage === value.keyword) {
+    uniques.forEach(uniqueImage => {
+      if (uniqueImage === image[attribute]) {
         flag = false;
       }
     })
     if (flag) {
-      dropdown.append($('<option></option>').attr('value', value.keyword).text(value.keyword));
-      uniqueKeywords.push(value.keyword);
+      dropdown
+        .append($('<option></option>')
+          .attr('value', image[attribute])
+          .text(image[attribute]));
+      uniques.push(image[attribute]);
     }
   })
 }
 
-$('select').on('change', function() {
+$('select').on('change', function () {
   let $selected = $(this).val();
-  console.log($selected);
   $('section').hide();
-  //How do I target an image based on alt?
-  //unhide the divs using parent node. =>>> .parent()
-  $(`img[alt = ${$selected}]`).parent().show();
+  $(`img[data-keyword = ${$selected}]`).parent().show();
+  $(`img[data-horns = ${$selected}]`).parent().show();
 });
 
+$('input[type=radio]').on('change', function () {
+  $('select').empty();
+  let $clicked = $(this).val();
+  console.log($(this).val())
+  if ($clicked === 'radio-one') {
+    renderDropDown('keyword');
+  } else {
+    renderDropDown('numberofhorns');
+  }
+});
+
+$('#page-one').on('click', function () {
+  $('section').hide();
+  renderPageOne();
+  //allImagesOne = [];
+})
+
+$('#page-two').on('click', function () {
+  $('section').hide()
+  renderPageTwo();
+  // console.log('get all images 2', getAllPageTwoFiles());
+})
 
 
 
