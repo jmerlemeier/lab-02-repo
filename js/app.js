@@ -65,16 +65,24 @@ const getAllPageTwoFiles = () => {
 
 //-------------------------------------
 
-
+// SORT FUNCTION
 Image.sort = function (array, property) {
   array.sort((a, b) => {
-    return a[property] < b[property] ? -1 : 1;
+    //return a[property] < b[property] ? -1 : 1;
+    if (a[property] > b[property]) {
+      return 1;
+    } else if (a[property] < b[property]) {
+      return -1;
+    } else {
+      return 0;
+    }
   })
 }
 
-// WORK ON THIS
 $('#horns').on('click', () => {
   Image.sort(allImagesOne, (this).numberofhorns);
+  console.log('in the click sorting.');
+  console.log('number of horns is ', this.numberofhorns);
 })
 
 function renderDropDown(attribute) {
