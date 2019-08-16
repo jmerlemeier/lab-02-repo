@@ -66,24 +66,50 @@ const getAllPageTwoFiles = () => {
 //-------------------------------------
 
 // SORT FUNCTION
-Image.sort = function (array, property) {
-  array.sort((a, b) => {
-    //return a[property] < b[property] ? -1 : 1;
-    if (a[property] > b[property]) {
-      return 1;
-    } else if (a[property] < b[property]) {
-      return -1;
-    } else {
-      return 0;
-    }
-  })
-}
+// Image.sort = function (array, property) {
+//   array.sort((a, b) => {
+//     //return a[property] < b[property] ? -1 : 1;
+//     if (a[property] > b[property]) {
+//       return 1;
+//     } else if (a[property] < b[property]) {
+//       return -1;
+//     } else {
+//       return 0;
+//     }
+//   })
+// }
 
-$('#horns').on('click', () => {
-  Image.sort(allImagesOne, (this).numberofhorns);
-  console.log('in the click sorting.');
-  console.log('number of horns is ', this.numberofhorns);
+// $('#horns').on('click', () => {
+//   Image.sort(allImagesOne, (this).numberofhorns);
+//   console.log('in the click sorting.');
+//   console.log('number of horns is ', this.numberofhorns);
+// })
+
+$('#sort-template').on('change', function () {
+  console.log($('#sort-template option:selected').val());
+  let selectedSorter = $('#sort-template option:selected').val();
+  if (selectedSorter === 'title') {
+    allImagesOne.sort(function (a, b) {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+    });
+  } else if (selectedSorter === 'numberofhorns') {
+    allImagesOne.sort(function (a, b) {
+      if (a.numberofhorns < b.numberofhorns) { return -1; }
+      if (a.numberofhorns > b.numberofhorns) { return 1; }
+    });
+  }
+  $('main').html('');
+
+  allImagesOne.forEach(image => {
+    console.log('image', image);
+    image.renderWithHandlebars();
+
+  })
 })
+
+
+
 
 function renderDropDown(attribute) {
   const uniques = [];
