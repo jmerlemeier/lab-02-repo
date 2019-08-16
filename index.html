@@ -14,7 +14,7 @@
   <script id="horn-template" type="text/x-handlebars-template">
     <section id="{{keyword}}">
       <h2>{{title}}</h2>
-      <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{horns}}">
+      <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{numberofhorns}}" />
       <p>{{description}}</p>
     </section>
     </script>
@@ -33,17 +33,15 @@
     <select id="dropdown-template">
       <option value="default">Filter by Keyword</option>
     </select>
+    <div id="sorting">
+      <span>Title</span><span id="horns">Number of Horns</span>
+    </div>
     <nav>
       <button id="page-one">Page One</button>
       <button id="page-two">Page Two</button>
     </nav>
   </header>
-  <main>
-    <!-- <section id="photo-template">
-      <h2></h2>
-      <img src="" alt="" data-keyword="" data-horns="">
-      <p></p>
-    </section> -->
+  <main>]
   </main>
   <footer>
     &copy; 2019 Code Fellows

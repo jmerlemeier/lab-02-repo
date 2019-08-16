@@ -19,22 +19,27 @@ Image.prototype.renderWithHandleBars = function () {
   $('main').append(hornImage);
 };
 
-
-//renderWithHandleBars(allImagesOne);
-
+// DRY
 const renderPageOne = () => {
   allImagesOne.forEach(image => {
     image.renderWithHandleBars();
   })
 }
 
-const getAllPagOneFiles = () => {
-  $.get('data/page-1.json').then(images => {
-    images.forEach(eachImage => {
-      allImagesOne.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+const getAllPageOneFiles = () => {
+  $.get('data/page-1.json')
+    .then(images => {
+      images.forEach(eachImage => {
+        allImagesOne.push(new Image(
+          eachImage.image_url,
+          eachImage.title,
+          eachImage.description,
+          eachImage.keyword,
+          eachImage.horns
+        ));
+      })
+      renderPageOne();
     })
-    renderPageOne();
-  })
 }
 
 const renderPageTwo = () => {
@@ -44,18 +49,33 @@ const renderPageTwo = () => {
 }
 
 const getAllPageTwoFiles = () => {
-  $.get('data/page-2.json').then(images => {
-    images.forEach(eachImage => {
-      allImagesTwo.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+  $.get('data/page-2.json')
+    .then(images => {
+      images.forEach(eachImage => {
+        allImagesTwo.push(new Image(
+          eachImage.image_url,
+          eachImage.title,
+          eachImage.description,
+          eachImage.keyword,
+          eachImage.horns
+        ));
+      })
     })
+}
+
+//-------------------------------------
+
+
+Image.sort = function (array, property) {
+  array.sort((a, b) => {
+    return a[property] < b[property] ? -1 : 1;
   })
 }
 
-
-getAllPageTwoFiles();
-getAllPagOneFiles();
-
-//-------------------------------------
+// WORK ON THIS
+$('#horns').on('click', () => {
+  Image.sort(allImagesOne, (this).numberofhorns);
+})
 
 function renderDropDown(attribute) {
   const uniques = [];
@@ -106,3 +126,7 @@ $('#page-two').on('click', function () {
   renderPageTwo();
   // console.log('get all images 2', getAllPageTwoFiles());
 })
+
+getAllPageTwoFiles();
+getAllPageOneFiles();
+

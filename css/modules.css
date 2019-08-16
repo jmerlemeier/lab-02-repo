@@ -1,5 +1,8 @@
 section {
   margin: 25px;
+  border: solid black 0.2em;
+  padding: 1em;
+  text-align: center;
 }
 
 h1 {
@@ -7,3 +10,23 @@ h1 {
   font-size: 5em;
   padding: 1em;
 }
+
+nav {
+  margin: 10px;
+}
+
+select {
+  height: 30px;
+  width: 10em;
+  font-size: 20px;
+  margin: 10px;
+}
+
+label {
+  font-size: 1.6em;
+}
+
+#radio-buttons {
+  margin: 20px;
+}
+
