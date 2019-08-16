@@ -26,9 +26,9 @@ Estimate of time needed to complete: 120 mins
 
 Start time: 10:15
 
-Finish time: 
+Finish time: 13:30 (minus lunch fom 1200-1300)
 
-Actual time needed to complete: 
+Actual time needed to complete: 2.25 hrs
 
 <!-- ------------------------------- -->
 
@@ -36,7 +36,7 @@ Number and name of feature: Feature #3
 
 Estimate of time needed to complete: 60 mins
 
-Start time: 
+Start time: 0820
 
 Finish time: 
 
