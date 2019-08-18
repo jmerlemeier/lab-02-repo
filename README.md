@@ -4,9 +4,10 @@
 
 ### Features 
 
-* what does it do
-* why do I care?
-* how do I run it?
+* This project provides display of images that are organized into boxes uses flexbox
+* Pagination has been added to for easy access to images on page one and page two.
+* Images can be filtered by keyword and number of horns
+* Images an also be sorted by title and number of horns
 
 Number and name of feature: Feature #1 Display images
 
