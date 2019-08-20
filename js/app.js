@@ -11,6 +11,7 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.numberofhorns = numberofhorns;
 };
 
+// RENDER HANDLEBARS
 Image.prototype.renderWithHandleBars = function () {
   let hornHtml = $('#horn-template').html();
   const renderImageWithHandlebars = Handlebars.compile(hornHtml);
