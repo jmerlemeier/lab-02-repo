@@ -3,12 +3,14 @@ section {
   border: solid black 0.2em;
   padding: 1em;
   text-align: center;
+
 }
 
 h1 {
   font-family: 'Lexend Zetta', sans-serif;
   font-size: 5em;
   padding: 1em;
+
 }
 
 nav {
@@ -29,4 +31,5 @@ label {
 #radio-buttons {
   margin: 20px;
 }
+
 
