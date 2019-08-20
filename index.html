@@ -14,12 +14,17 @@
   <script id="horn-template" type="text/x-handlebars-template">
     <section id="{{keyword}}">
       <h2>{{title}}</h2>
+
       <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{numberofhorns}}" />
+
+      <img src="{{image_url}}" alt="" data-keyword="{{keyword}}" data-horns="{{horns}}">
+
       <p>{{description}}</p>
     </section>
     </script>
 
 </head>
+
 
 <body>
   <header>
@@ -58,3 +63,36 @@
 </body>
 
 </html>
+
+
+<body>
+  <header>
+    <h1>The Gallery of Horns</h1>
+    <div id="radio-buttons">
+      <input id="radio-one" type="radio" name="filter" value="radio-one">
+      <label>Search by Keyword</label>
+      <input id="radio-two" type="radio" name="filter" value="radio-two">
+      <label>Search by Number of Horns</label>
+    </div>
+    <select id="dropdown-template">
+      <option value="default">Filter by Keyword</option>
+    </select>
+    <nav>
+      <button id="page-one">Page One</button>
+      <button id="page-two">Page Two</button>
+    </nav>
+  </header>
+  <main>
+    
+  </main>
+  <footer>
+    &copy; 2019 Code Fellows
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>
+
