@@ -3,7 +3,6 @@
 let allImagesOne = [];
 let allImagesTwo = [];
 
-
 const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.image_url = image_url;
   this.title = title;
@@ -12,6 +11,7 @@ const Image = function (image_url, title, description, keyword, numberofhorns) {
   this.numberofhorns = numberofhorns;
 };
 
+// RENDER HANDLEBARS
 Image.prototype.renderWithHandleBars = function () {
   let hornHtml = $('#horn-template').html();
   const renderImageWithHandlebars = Handlebars.compile(hornHtml);
@@ -19,22 +19,27 @@ Image.prototype.renderWithHandleBars = function () {
   $('main').append(hornImage);
 };
 
-
-//renderWithHandleBars(allImagesOne);
-
+// DRY
 const renderPageOne = () => {
   allImagesOne.forEach(image => {
     image.renderWithHandleBars();
   })
 }
 
-const getAllPagOneFiles = () => {
-  $.get('data/page-1.json').then(images => {
-    images.forEach(eachImage => {
-      allImagesOne.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+const getAllPageOneFiles = () => {
+  $.get('data/page-1.json')
+    .then(images => {
+      images.forEach(eachImage => {
+        allImagesOne.push(new Image(
+          eachImage.image_url,
+          eachImage.title,
+          eachImage.description,
+          eachImage.keyword,
+          eachImage.horns
+        ));
+      })
+      renderPageOne();
     })
-    renderPageOne();
-  })
 }
 
 const renderPageTwo = () => {
@@ -44,22 +49,60 @@ const renderPageTwo = () => {
 }
 
 const getAllPageTwoFiles = () => {
-  $.get('data/page-2.json').then(images => {
-    images.forEach(eachImage => {
-      allImagesTwo.push(new Image(eachImage.image_url, eachImage.title, eachImage.description, eachImage.keyword, eachImage.horns));
+  $.get('data/page-2.json')
+    .then(images => {
+      images.forEach(eachImage => {
+        allImagesTwo.push(new Image(
+          eachImage.image_url,
+          eachImage.title,
+          eachImage.description,
+          eachImage.keyword,
+          eachImage.horns
+        ));
+      })
+    })
+}
+
+//-------------------------------------
+
+
+function sortImages(imageArray) {
+  $('#sort-template').on('change', function () {
+    console.log($('#sort-template option:selected').val());
+    let selectedSorter = $('#sort-template option:selected').val();
+    if (selectedSorter === 'title') {
+      imageArray.sort(function (a, b) {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+    } else if (selectedSorter === 'numberofhorns') {
+      imageArray.sort(function (a, b) {
+        if (a.numberofhorns < b.numberofhorns) {
+          return -1;
+        }
+        if (a.numberofhorns > b.numberofhorns) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    $('main').html('');
+
+    imageArray.forEach(image => {
+      console.log('image', image);
+      image.renderWithHandleBars();
     })
   })
 }
 
-
-getAllPageTwoFiles();
-getAllPagOneFiles();
-
-//-------------------------------------
-
 function renderDropDown(attribute) {
   const uniques = [];
-  let dropdown = $('select');
+  let dropdown = $('#dropdown-template');
   allImagesOne.forEach(image => {
     let flag = true;
     uniques.forEach(uniqueImage => {
@@ -77,7 +120,7 @@ function renderDropDown(attribute) {
   })
 }
 
-$('select').on('change', function () {
+$('#dropdown-template').on('change', function () {
   let $selected = $(this).val();
   $('section').hide();
   $(`img[data-keyword = ${$selected}]`).parent().show();
@@ -85,7 +128,7 @@ $('select').on('change', function () {
 });
 
 $('input[type=radio]').on('change', function () {
-  $('select').empty();
+  $('#dropdown-template').empty();
   let $clicked = $(this).val();
   console.log($(this).val())
   if ($clicked === 'radio-one') {
@@ -95,29 +138,18 @@ $('input[type=radio]').on('change', function () {
   }
 });
 
+sortImages(allImagesOne)
 $('#page-one').on('click', function () {
   $('section').hide();
   renderPageOne();
-  //allImagesOne = [];
+  sortImages(allImagesOne);
 })
 
 $('#page-two').on('click', function () {
   $('section').hide()
   renderPageTwo();
-  // console.log('get all images 2', getAllPageTwoFiles());
+  sortImages(allImagesTwo);
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+getAllPageTwoFiles();
+getAllPageOneFiles();

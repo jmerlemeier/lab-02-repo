@@ -1,5 +1,14 @@
 # lab-02-repo
 
+* Authors: Julie & Susanna
+
+### Features 
+
+* This project provides display of images that are organized into boxes uses flexbox
+* Pagination has been added to for easy access to images on page one and page two.
+* Images can be filtered by keyword and number of horns
+* Images an also be sorted by title and number of horns
+
 Number and name of feature: Feature #1 Display images
 
 Estimate of time needed to complete: 60 mins
@@ -37,4 +46,6 @@ Actual time needed to complete:
 
 ## Resources: 
 
-https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json
+* https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json
+* https://stackoverflow.com/questions/15167545/how-to-crop-a-rectangular-image-into-a-square-with-css
+* https://css-tricks.com/forums/topic/how-to-make-footer-floating-at-bottom-of-page/
